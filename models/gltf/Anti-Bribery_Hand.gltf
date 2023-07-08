@@ -1,0 +1,256 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v3.2.40",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "13450_Bag_of_Gold_v1_L3"
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "01___13450_Bag_of_gold",
+            "pbrMetallicRoughness" : {
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.8267949223518372
+            }
+        },
+        {
+            "doubleSided" : true,
+            "name" : "Material_0",
+            "pbrMetallicRoughness" : {}
+        },
+        {
+            "doubleSided" : true,
+            "name" : "_16834_hand_v1default",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.800000011920929,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.5
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "13450_Bag_of_Gold_v1_L3",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                },
+                {
+                    "attributes" : {
+                        "POSITION" : 4,
+                        "NORMAL" : 5,
+                        "TEXCOORD_0" : 6
+                    },
+                    "indices" : 7,
+                    "material" : 1
+                },
+                {
+                    "attributes" : {
+                        "POSITION" : 8,
+                        "NORMAL" : 9,
+                        "TEXCOORD_0" : 10
+                    },
+                    "indices" : 11,
+                    "material" : 2
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 25500,
+            "max" : [
+                0.00800149142742157,
+                0.10759592056274414,
+                0.051696497946977615
+            ],
+            "min" : [
+                -0.10067309439182281,
+                -0.006399096921086311,
+                -0.061181195080280304
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 25500,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 25500,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 101424,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 19011,
+            "max" : [
+                0.04916556179523468,
+                0.03643278032541275,
+                0.05848672613501549
+            ],
+            "min" : [
+                -0.20288902521133423,
+                -0.04044691100716591,
+                -0.08970758318901062
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 19011,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 19011,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5123,
+            "count" : 109944,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 8,
+            "componentType" : 5126,
+            "count" : 70267,
+            "max" : [
+                0.1264462023973465,
+                0.18350526690483093,
+                0.11537519842386246
+            ],
+            "min" : [
+                0.06085529923439026,
+                -0.039021171629428864,
+                -0.03928719460964203
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 9,
+            "componentType" : 5126,
+            "count" : 70267,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 10,
+            "componentType" : 5126,
+            "count" : 70267,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 11,
+            "componentType" : 5125,
+            "count" : 401076,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 306000,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 306000,
+            "byteOffset" : 306000
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 204000,
+            "byteOffset" : 612000
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 202848,
+            "byteOffset" : 816000
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 228132,
+            "byteOffset" : 1018848
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 228132,
+            "byteOffset" : 1246980
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 152088,
+            "byteOffset" : 1475112
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 219888,
+            "byteOffset" : 1627200
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 843204,
+            "byteOffset" : 1847088
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 843204,
+            "byteOffset" : 2690292
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 562136,
+            "byteOffset" : 3533496
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1604304,
+            "byteOffset" : 4095632
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 5699936,
+            "uri" : "Anti-Bribery_Hand.bin"
+        }
+    ]
+}

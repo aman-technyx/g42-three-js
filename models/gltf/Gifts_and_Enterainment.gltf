@@ -1,0 +1,117 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v3.4.50",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "present.1",
+            "translation" : [
+                0.001982237445190549,
+                0.05999339371919632,
+                0.005158343352377415
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "Material_0",
+            "pbrMetallicRoughness" : {}
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh_0",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "TEXCOORD_0" : 1,
+                        "NORMAL" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 11512,
+            "max" : [
+                0.09843330085277557,
+                0.06770758330821991,
+                0.10457117110490799
+            ],
+            "min" : [
+                -0.10449426621198654,
+                -0.1749659776687622,
+                -0.1066221371293068
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 11512,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 11512,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 54114,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 138144,
+            "byteOffset" : 0,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 92096,
+            "byteOffset" : 138144,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 138144,
+            "byteOffset" : 230240,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 108228,
+            "byteOffset" : 368384,
+            "target" : 34963
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 476612,
+            "uri" : "Gifts_and_Enterainment.bin"
+        }
+    ]
+}

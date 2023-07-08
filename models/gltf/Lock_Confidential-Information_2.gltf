@@ -1,0 +1,123 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v3.4.50",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                1
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "locked_lock.003"
+        },
+        {
+            "children" : [
+                0
+            ],
+            "name" : "RootNode.001",
+            "scale" : [
+                0.6966356039047241,
+                0.6966356039047241,
+                0.6966356039047241
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "Material_0.001",
+            "pbrMetallicRoughness" : {}
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh_0.004",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "TEXCOORD_0" : 1,
+                        "NORMAL" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 7430,
+            "max" : [
+                0.17121630907058716,
+                0.19197173416614532,
+                0.10571162402629852
+            ],
+            "min" : [
+                -0.15509726107120514,
+                -0.03621897101402283,
+                -0.048008620738983154
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 7430,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 7430,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 30864,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 89160,
+            "byteOffset" : 0,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 59440,
+            "byteOffset" : 89160,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 89160,
+            "byteOffset" : 148600,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 61728,
+            "byteOffset" : 237760,
+            "target" : 34963
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 299488,
+            "uri" : "Lock_Confidential-Information_2.bin"
+        }
+    ]
+}

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>three.js</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <!-- <link type="text/css" rel="stylesheet" href="main.css" /> -->
+    <style>
+      body {
+        /* background-color: #eee; */
+      }
+      canvas {
+        position: fixed;
+      }
+      #info {
+        color: #222;
+      }
+      a {
+        color: #00f;
+      }
+      #button {
+        position: absolute;
+        bottom: 15px;
+        left: calc(50% - 40px);
+      }
+    </style>
+  </head>
+
+  <body style="height: 4000px">
+    <div id="info">
+      <div style="position: fixed" id="pcdmodel"></div>
+    </div>
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script
+      async
+      src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"
+    ></script>
+    <!-- "three": "../build/three.module.js", -->
+    <!-- "three/addons/": "./jsm/" -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.149.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.149.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import * as THREE from "three";
+
+      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+      import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+      import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+      import { MeshSurfaceSampler } from "three/addons/math/MeshSurfaceSampler.js";
+
+      let pointsGeometry = new THREE.BufferGeometry();
+
+      const vertices = [];
+      const tempPosition = new THREE.Vector3();
+      const group = new THREE.Group();
+
+      let t = 0;
+      let camera,
+        scene,
+        renderer,
+        v3Array_1,
+        v3Array_2,
+        v3Array_3,
+        points,
+        MaterialsVariantsShoeObject,
+        sizeArray,
+        DamagedHelmetObject,
+        currentObject;
+      const colors = [];
+
+      const color = new THREE.Color();
+      function init() {
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        document.body.appendChild(renderer.domElement);
+
+        camera = new THREE.PerspectiveCamera(
+          160,
+          window.innerWidth / window.innerHeight,
+          0.25,
+          20
+        );
+        camera.position.set(0, 0, 0);
+
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+
+        scene = new THREE.Scene();
+        scene.environment = pmremGenerator.fromScene(
+          new RoomEnvironment(),
+          0.04
+        ).texture;
+
+        const colorArray = [0xff004141, 0xffff8068, 0xff00afff];
+        const sizeArrayX = [0.001, 0.01];
+
+        function randomIntFromInterval(min, max) {
+          // min and max included
+          return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        // const loader = new GLTFLoader().setPath("models/gltf/");
+        // loader.load("Satellite.gltf", async function (gltf) {
+        // const loader = new GLTFLoader().setPath(
+        // 	"models/gltf/lock/"
+        // 	// "models/gltf/Lock_Confidential-Information/"
+        // );
+        const loader = new GLTFLoader().setPath("models/gltf/");
+        loader.load("Galaxy-1.gltf", async function (gltf) {
+          let sampler;
+          console.log("sampler", gltf);
+
+          gltf.scene.traverse((obj) => {
+            console.log("Objects", obj);
+            if (obj.isMesh) {
+              sampler = new MeshSurfaceSampler(obj).build();
+              const _gltfObject = transformMesh(sampler, true);
+
+              // scene.add(_gltfObject);
+            }
+          });
+
+          const gltfObject = transformMesh(sampler, true);
+          gltfObject.name = "MaterialsVariantsShoe";
+          MaterialsVariantsShoeObject = gltfObject;
+
+          scene.add(gltfObject);
+          // scene.add(gltf.scene);
+        });
+
+        /////////////////////////////////////////////////////////////////////////
+        ///// TRANSFORM MESH INTO POINTS
+        const count = 7500;
+        const sizes = new Float32Array(count);
+
+        function transformMesh(sampler, isVisible) {
+          // Loop to sample a coordinate for each points
+          for (let i = 0; i < count; i++) {
+            // Sample a random position in the model
+            sampler.sample(tempPosition);
+            // Push the coordinates of the sampled coordinates into the array
+            vertices.push(tempPosition.x, tempPosition.y, tempPosition.z);
+            sizes[i] = 10;
+
+            color.setHex(colorArray[randomIntFromInterval(0, 2)]);
+            colors.push(color.r, color.g, color.b);
+          }
+
+          // Define all points positions from the previously created array
+          pointsGeometry.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute(vertices, 3)
+          );
+
+          sizeArray = sizes;
+          console.log("sizeArray", sizeArray);
+
+          v3Array_1 = Vector3ArrayFromGeometry(pointsGeometry);
+
+          if (v3Array_1) {
+            v3Array_2 = v3Array_1.map((v) => {
+              const vd = new THREE.Vector3();
+              vd.copy(v)
+                .normalize()
+                .multiplyScalar(2 + 3 * THREE.MathUtils.seededRandom());
+              return v.clone().add(vd);
+            });
+          }
+
+          v3Array_3 = Vector3ArrayLerp(v3Array_1, v3Array_2, 0);
+
+          points = new THREE.Points(
+            Vector3ArrayToGeometry(v3Array_3),
+            new THREE.PointsMaterial({
+              // color: 0x00afaf,
+              vertexColors: true,
+              size: 0.006,
+            })
+          );
+          points.visible = isVisible;
+
+          return points;
+        }
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.addEventListener("change", render); // use if there is no animation loop
+        // controls.addEventListener("mousemove", onmousemove); // use if there is no animation loop
+        controls.minDistance = 2;
+        controls.maxDistance = 10;
+        controls.target.set(0, -0.000015, -0.0002);
+        controls.enableZoom = false;
+        controls.update();
+      }
+      var mouseTolerance = 0.3;
+      document.onmousemove = function (e) {
+        // var centerX = window.innerWidth * 0.4;
+        // var centerY = window.innerHeight * 0.4;
+        // scene.rotation.y = ((e.clientX - centerX) / centerX) * mouseTolerance;
+        // scene.rotation.x = ((e.clientY - centerY) / centerY) * mouseTolerance;
+      };
+
+      ///////// skull /////
+      // Vector3 Array to Typed Array
+      const Vector3ArrayToTyped = (v3Array) => {
+        let i = 0,
+          len = v3Array.length,
+          vertArray = [];
+        while (i < len) {
+          let v = v3Array[i];
+          vertArray.push(v.x, v.y, v.z);
+          i += 1;
+        }
+        return new THREE.Float32BufferAttribute(vertArray, 3);
+      };
+
+      // Buffer Geometry from v3Array
+      const Vector3ArrayToGeometry = (v3Array) => {
+        const typedArray = Vector3ArrayToTyped(v3Array);
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute("position", typedArray);
+        geometry.setAttribute("size", new THREE.BufferAttribute(sizeArray, 1));
+        geometry.setAttribute(
+          "color",
+          new THREE.Float32BufferAttribute(colors, 3)
+        );
+        return geometry;
+      };
+
+      // Vector3 array from geometry
+      const Vector3ArrayFromGeometry = (geometry) => {
+        const pos = geometry.getAttribute("position");
+        let i = 0;
+        const len = pos.count,
+          v3Array = [];
+        while (i < len) {
+          const v = new THREE.Vector3(pos.getX(i), pos.getY(i), pos.getZ(i));
+          v3Array.push(v);
+          i += 1;
+        }
+        return v3Array;
+      };
+
+      // lerp two vector3 arrays
+      const Vector3ArrayLerp = (v3Array_1, v3Array_2, alpha) => {
+        if (v3Array_1) {
+          return v3Array_1.map((v, i) => {
+            return v.clone().lerp(v3Array_2[i], alpha);
+          });
+        }
+      };
+
+      // ---------- ----------
+      // ANIMATION LOOP
+      // ---------- ----------
+
+      const FPS_UPDATE = 200, // fps rate to update ( low fps for low CPU use, but choppy video )
+        FPS_MOVEMENT = 200; // fps rate to move object by that is independent of frame update rate
+      const FRAME_MAX = 100;
+
+      // update
+      const update = function (frame, frameMax) {
+        const p = frame / frameMax;
+        const a = 1 - THREE.MathUtils.pingpong(p - 0.5, 1) * 2;
+        const v3Array = Vector3ArrayLerp(v3Array_1, v3Array_2, a);
+        if (points && points.geometry) {
+          points.geometry.copy(Vector3ArrayToGeometry(v3Array));
+        }
+      };
+
+      function rotateObject() {
+        if (MaterialsVariantsShoeObject) {
+          MaterialsVariantsShoeObject.rotation.y += 0.001;
+        }
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        rotateObject();
+        render();
+      }
+
+      function render() {
+        renderer.render(scene, camera);
+      }
+
+      window.onload = function () {
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+        }, 2);
+        const canvasEl = document.getElementsByTagName("canvas");
+        if (canvasEl && canvasEl.style && canvasEl.style.position) {
+          canvasEl.style.position = "fixed";
+        }
+
+        window.onscroll = function () {
+          if (this.scrollY < 2000) {
+            t = this.scrollY;
+            update(t / 20, FRAME_MAX);
+            render();
+          }
+          this.oldScroll = this.scrollY;
+        };
+      };
+
+      init();
+      animate();
+    </script>
+  </body>
+</html>
